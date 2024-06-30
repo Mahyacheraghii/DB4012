@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from '../styles/home.module.css';
 import axios from 'axios';
 
 const Home = () => {
   const [id, setId] = useState('');
-  const [data, setData] = useState([]);
   const [status, setStatus] = useState('');
   const [immigrationType, setImmigrationType] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-  function processBackendResponse(response) {
-    return response.map(item => ({
-      NationalID: parseInt(item.NationalID.slice(1)), // Remove the leading "N" and convert to integer
-      FName: item.FName.replace(/"/g, ''), // Remove double quotes
-      LName: item.LName.replace(/"/g, ''),
-      PhoneNumber: parseInt(item.PhoneNumber), // Convert to integer
-      Addres: item.Addres.replace(/"/g, ''),
-      BirthDate: item.BirthDate.replace(/"/g, ''), // Remove double quotes
-      PassportStatus: item.PassportStatus.replace(/"/g, ''),
-    })
-    );
-    // return data.map((obj) => {
-    //       return Object.fromEntries(
-    //         Object.entries(obj).map(([key, value]) => [key, value.replace(/"/g, '')])
-    //       );
-    //     });
-  }
+
   // row 1
   const getConsultant = async (id) => {
-    console.log(id)
     axios.get(`http://localhost:8090/api/consultant/${id}`)
       .then(response => {
         alert(JSON.stringify(response.data, null, 2))
@@ -38,7 +19,6 @@ const Home = () => {
   };
 
   const getCustomer = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/customer/${id}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -48,7 +28,6 @@ const Home = () => {
   };
 
   const getDocument = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/document/${id}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -59,7 +38,6 @@ const Home = () => {
 
   //row2
   const getCustomerDocument = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/customer/${id}/documents`);
       alert(JSON.stringify(response.data, null, 2))
@@ -80,7 +58,6 @@ const Home = () => {
   }
 
   const getVisasByStatus = async (status) => {
-    console.log(status)
     try {
       const response = await axios.get(`http://localhost:8090/api/visas/status/${status}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -91,7 +68,6 @@ const Home = () => {
 
   //row 3
   const getVisasByImmigrationType = async (immigrationType) => {
-    console.log(immigrationType)
     try {
       const response = await axios.get(`http://localhost:8090/api/visas/immigrationType/${immigrationType}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -101,7 +77,6 @@ const Home = () => {
   };
 
   const getVisasByCountryID = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/visas/country/${id}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -111,7 +86,6 @@ const Home = () => {
   };
 
   const getCustomersByPaymentStatus = async (Status) => {
-    console.log(Status)
     try {
       const response = await axios.get(`http://localhost:8090/api/customers/paymentStatus/${Status}`);
       alert(JSON.stringify(response.data, null, 2))
@@ -122,7 +96,6 @@ const Home = () => {
 
   //row 4
   const getCustomersByCountryID = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/customers/country/${id}/`);
       alert(JSON.stringify(response.data, null, 2))
@@ -132,7 +105,6 @@ const Home = () => {
   };
 
   const getCustomersByConsultantID = async (id) => {
-    console.log(id)
     try {
       const response = await axios.get(`http://localhost:8090/api/customers/consultant/${id}/`);
       alert(JSON.stringify(response.data, null, 2))
@@ -142,32 +114,15 @@ const Home = () => {
   };
 
   const getCustomersByImmigrationType = async (immigrationType) => {
-    console.log(immigrationType)
     try {
       const response = await axios.get(`http://localhost:8090/api/customers/immigrationType/${immigrationType}`);
-      
-      response.data=JSON.stringify(response.data, null, 2);
-      alert(response.data)
-      // console.log('Before setData:', data);
-      // const dataWithoutQuotes = removeQuotes(response.data);
-      const processedData = processBackendResponse(response.data);
-      setData((prevData) => {
-        // console.log('Updating data:', response.data);
-        return processedData;
-      });
-      // console.log(dataWithoutQuotes)
-      // setIsOpen(true);
-      // console.log('Updating data:', dataWithoutQuotes);
-      // alert(dataWithoutQuotes);
-      // console.log('dfghjk:', data[0].Addres);
+
+      alert(JSON.stringify(response.data, null, 2))
+
     } catch (error) {
       console.error('An error occurred:', error);
     }
   };
-
-
-
-
 
   return (
     <div className='w-full flex flex-col justify-center items-center' >
@@ -180,17 +135,14 @@ const Home = () => {
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشاور </h3>
             <hr style={{ border: '0.5px solid #bdbdbd', width: '15rem', marginTop: '0.5rem', marginBottom: '0.5rem' }} />
-            <h2 className='mt-2'> کد ملی مشاور را وارد کنید. </h2>
-            {/* <div className='my-7'></div> */}
+            <h2 className='mt-2'> کد ملی مشاور را وارد کنید. </h2>\
             <input
               type="text"
               name="name"
               className={style.weekinput}
               placeholder="کد ملی "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
-
             <div className='my-3'></div>
             <button className={style.week} onClick={() => getConsultant(id)}>
               ارسال
@@ -210,7 +162,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder="کد ملی "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
@@ -232,7 +183,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder=" شناسه مدرک "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
@@ -241,6 +191,7 @@ const Home = () => {
             </button>
           </div>
         </div>
+
       </div>
 
       {/* cards row 2 */}
@@ -257,14 +208,12 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder="کد ملی "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
             <button className={style.week} onClick={() => getCustomerDocument(id)}>
               ارسال
             </button>
-
           </div>
         </div>
 
@@ -275,12 +224,11 @@ const Home = () => {
             <div className='my-7'></div>
             <h2 className='mt-2'> برای دریافت لیست مشاوران کلیک کنید. </h2>
             <div className='my-7'></div>
-            {/* <div className='my-1'></div> */}
             <button className={style.week} onClick={getAllConsultants}>
               دریافت
             </button>
-
           </div>
+
         </div>
 
         {/* 6 get visa by status */}
@@ -294,14 +242,12 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder=" وضعیت "
-              // value={id}
               onChange={(e) => setStatus(e.target.value)}
             />
             <div className='my-3'></div>
             <button className={style.week} onClick={() => getVisasByStatus(status)}>
               ارسال
             </button>
-
           </div>
         </div>
 
@@ -321,7 +267,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder=" روش مهاجرتی "
-              // value={id}
               onChange={(e) => setImmigrationType(e.target.value)}
             />
             <div className='my-3'></div>
@@ -344,14 +289,12 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder=" شناسه کشور "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-4'></div>
             <button className={style.week} onClick={() => getVisasByCountryID(id)}>
               ارسال
             </button>
-
           </div>
         </div>
 
@@ -376,6 +319,7 @@ const Home = () => {
 
           </div>
         </div>
+
       </div>
 
       {/* cards 4 */}
@@ -392,7 +336,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder="شناسه کشور "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
@@ -414,7 +357,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder="شناسه مشاور "
-              // value={id}
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
@@ -436,7 +378,6 @@ const Home = () => {
               name="name"
               className={style.weekinput}
               placeholder="روش مهاجرتی "
-              // value={id}
               onChange={(e) => setImmigrationType(e.target.value)}
             />
             <div className='my-3'></div>
@@ -446,14 +387,8 @@ const Home = () => {
 
           </div>
         </div>
+
       </div>
-
-      {/* <div className={style.container}> */}
-
-        {/* {isOpen && {CustomerTableModa()}} */}
-        {/* {CustomerModal()} */}
-      {/* </div> */}
-
 
     </div>
   );
