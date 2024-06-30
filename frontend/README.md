@@ -1,7 +1,7 @@
 # running databes
-run docker container:
+1-run docker container:
 
-1-  https://www.youtube.com/watch?v=9c7Ti2OcLZg
+  https://www.youtube.com/watch?v=9c7Ti2OcLZg
 
    docker run -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Mahya09354600908' -p 1433:1433 --name sql_edge -    d mcr.microsoft.com/azure-sql-edge
 
