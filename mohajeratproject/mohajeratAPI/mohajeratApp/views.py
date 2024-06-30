@@ -271,3 +271,115 @@ def entrepreneurshipApirequest(request, id=None):
             entrepreneurship_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse("Failed to Add")
+    
+    
+@csrf_exempt
+def customerDocumentApirequest(request, customer_id):
+    if request.method == 'GET':
+        try:
+            customer = Customer.objects.get(pk=customer_id)
+            documents = Document.objects.filter(customer=customer)
+            document_serializer = DocumentSerializer(documents, many=True)
+            return JsonResponse(document_serializer.data, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse("Customer not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+    
+@csrf_exempt
+def getAllConsultantsApirequest(request):
+    if request.method == 'GET':
+        consultants = Consultant.objects.all()
+        consultant_serializer = ConsultantSerializer(consultants, many=True)
+        return JsonResponse(consultant_serializer.data, safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+    
+@csrf_exempt
+def getVisasByStatusApirequest(request, status):
+    if request.method == 'GET':
+        try:
+            visas = Visa.objects.filter(status=status)
+            visa_serializer = VisaSerializer(visas, many=True)
+            return JsonResponse(visa_serializer.data, safe=False)
+        except Visa.DoesNotExist:
+            return JsonResponse("Visas not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+    
+@csrf_exempt
+def getVisasByImmigrationType(request, immigration_type):
+    if request.method == 'GET':
+        try:
+            visas = Visa.objects.filter(immigration_type=immigration_type)
+            visa_serializer = VisaSerializer(visas, many=True)
+            return JsonResponse(visa_serializer.data, safe=False)
+        except Visa.DoesNotExist:
+            return JsonResponse("Visas not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+    
+@csrf_exempt
+def getVisasByCountryID(request, country_id):
+    if request.method == 'GET':
+        try:
+            customers = Customer.objects.filter(choose__country__CountryID=country_id)
+            visas = Visa.objects.filter(Customer__in=customers)
+            visa_serializer = VisaSerializer(visas, many=True)
+            return JsonResponse(visa_serializer.data, safe=False)
+        except Visa.DoesNotExist:
+            return JsonResponse("Visas not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+@csrf_exempt
+def getCustomersByPaymentStatus(request, payment_status):
+    if request.method == 'GET':
+        try:
+            customers = Customer.objects.filter(cost__PaymentStatus=payment_status)
+            customer_serializer = CustomerSerializer(customers, many=True)
+            return JsonResponse(customer_serializer.data, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse("Customers not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+@csrf_exempt
+def getCustomersByCountryID(request, country_id):
+    if request.method == 'GET':
+        try:
+            customers = Customer.objects.filter(choose__country__CountryID=country_id)
+            customer_serializer = CustomerSerializer(customers, many=True)
+            return JsonResponse(customer_serializer.data, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse("Customers not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+@csrf_exempt
+def getCustomersByConsultantID(request, consultant_id):
+    if request.method == 'GET':
+        try:
+            customers = Customer.objects.filter(consultant__ConsultantID=consultant_id)
+            customer_serializer = CustomerSerializer(customers, many=True)
+            return JsonResponse(customer_serializer.data, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse("Customers not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)
+    
+@csrf_exempt
+def getCustomersByImmigrationType(request, immigration_type):
+    if request.method == 'GET':
+        try:
+            customers = Customer.objects.filter(visa__immigration_type=immigration_type)
+            customer_serializer = CustomerSerializer(customers, many=True)
+            return JsonResponse(customer_serializer.data, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse("Customers not found", safe=False)
+    else:
+        return JsonResponse("Invalid request method", safe=False)

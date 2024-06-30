@@ -43,4 +43,15 @@ urlpatterns = [
 
     url(r'^choose$', views.chooseApi),
     url(r'^choose/([0-9]+)$', views.chooseApi),
+    
+    url(r'^customer/([0-9]+)/document$', views.customerDocumentApirequest)
+    url(r'^consultants$', views.getAllConsultantsApirequest),
+    url(r'^visas/(?P<status>\w+)$', views.getVisasByStatusApirequest),
+    
+    url(r'^visas/country/(?P<country_id>\d+)$', getVisasByCountryID),
+    url(r'^visas/immigration-type/(?P<immigration_type>\w+)$', getVisasByImmigrationType),
+    url(r'^customers/country/(?P<country_id>\d+)$', getCustomersByCountryID),
+    url(r'^customers/consultant/(?P<consultant_id>\d+)$', getCustomersByConsultantID),
+    url(r'^customers/payment-status/(?P<payment_status>\w+)$', getCustomersByPaymentStatus),
+    url(r'^customers/immigration_type/(?P<immigration_type>\w+)$', getCustomersByImmigrationType),
 ]
