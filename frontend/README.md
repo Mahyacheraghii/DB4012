@@ -7,8 +7,10 @@ make connection using azure data studio(more information in backend/dbconfig.js)
 
 # running backend
 cd backend
+
 npm start
 
 # running frontend
 cd frontend
+
 npm run dev
