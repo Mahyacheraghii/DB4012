@@ -4,12 +4,15 @@ import axios from 'axios';
 
 const Home = () => {
   const [id, setId] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState([]);
   const [status, setStatus] = useState('');
   const [immigrationType, setImmigrationType] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
+  // row 1
   const getConsultant = async (id) => {
-    axios.get(`/consultant/${id}`)
+    console.log(id)
+    axios.get(`http://localhost:8090/api/consultant/${id}`)
       .then(response => {
         alert(JSON.stringify(response.data, null, 2))
       })
@@ -19,42 +22,38 @@ const Home = () => {
   };
 
   const getCustomer = async (id) => {
-    axios.get(`/customer/${id}`)
-      .then(response => {
-        alert(JSON.stringify(response.data, null, 2))
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    console.log(id)
+    try {
+      const response = await axios.get(`http://localhost:8090/api/customer/${id}`);
+      alert(JSON.stringify(response.data, null, 2))
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   const getDocument = async (id) => {
-    axios.get(`/document/${id}`)
-      .then(response => {
-        // const document = response.data;
-        alert(JSON.stringify(response.data, null, 2))
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    console.log(id)
+    try {
+      const response = await axios.get(`http://localhost:8090/api/document/${id}`);
+      alert(JSON.stringify(response.data, null, 2))
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
+  //row2
   const getCustomerDocument = async (id) => {
-    axios({
-      method: "GET",
-      url: `/customer/${id}/document/`,
-    })
-      .then((response) => {
-        const data = response.data;
-        alert(JSON.stringify(response.data, null, 2))
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    console.log(id)
+    try {
+      const response = await axios.get(`http://localhost:8090/api/customer/${id}/documents`);
+      alert(JSON.stringify(response.data, null, 2))
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   }
 
   const getAllConsultants = async () => {
-    axios.get('/consultants/')
+    axios.get('http://localhost:8090/api/consultants')
       .then(response => {
         const consultants = response.data;
         alert(JSON.stringify(response.data, null, 2))
@@ -62,80 +61,118 @@ const Home = () => {
       .catch(error => {
         console.error(error);
       });
-
   }
 
   const getVisasByStatus = async (status) => {
-    axios.get(`/visas/${status}/`)
-      .then(response => {
-        const visas = response.data;
-        alert(JSON.stringify(response.data, null, 2))
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    console.log(status)
+    try {
+      const response = await axios.get(`http://localhost:8090/api/visas/status/${status}`);
+      alert(JSON.stringify(response.data, null, 2))
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
+  //row 3
   const getVisasByImmigrationType = async (immigrationType) => {
+    console.log(immigrationType)
     try {
-      const response = await axios.get(`/visas/immigration-type/${immigrationType}/`);
-      const visas = response.data;
-      console.log(visas);
+      const response = await axios.get(`http://localhost:8090/api/visas/immigrationType/${immigrationType}`);
+      alert(JSON.stringify(response.data, null, 2))
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
 
   const getVisasByCountryID = async (id) => {
+    console.log(id)
     try {
-      const response = await axios.get(`/visas/country/${countryID}/`);
-      const visas = response.data;
-      console.log(visas);
+      const response = await axios.get(`http://localhost:8090/api/visas/country/${id}`);
+      alert(JSON.stringify(response.data, null, 2))
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
 
   const getCustomersByPaymentStatus = async (Status) => {
+    console.log(Status)
     try {
-      const response = await axios.get(`/customers/payment-status/${Status}/`);
-      const customers = response.data;
-      console.log(customers);
+      const response = await axios.get(`http://localhost:8090/api/customers/paymentStatus/${Status}`);
+      alert(JSON.stringify(response.data, null, 2))
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
 
+  //row 4
   const getCustomersByCountryID = async (id) => {
+    console.log(id)
     try {
-      const response = await axios.get(`/customers/country/${id}/`);
-      const customers = response.data;
-      console.log(customers);
+      const response = await axios.get(`http://localhost:8090/api/customers/country/${id}/`);
+      alert(JSON.stringify(response.data, null, 2))
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
 
   const getCustomersByConsultantID = async (id) => {
+    console.log(id)
     try {
-      const response = await axios.get(`/customers/consultant/${id}/`);
-      const customers = response.data;
-      console.log(customers);
+      const response = await axios.get(`http://localhost:8090/api/customers/consultant/${id}/`);
+      alert(JSON.stringify(response.data, null, 2))
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
 
   const getCustomersByImmigrationType = async (immigrationType) => {
+    console.log(immigrationType)
     try {
-      const response = await axios.get(`/customers/immigration_type/${immigrationType}/`);
-      const customers = response.data;
-      console.log(customers);
+      const response = await axios.get(`http://localhost:8090/api/customers/immigrationType/${immigrationType}`);
+      // alert(JSON.stringify(response.data, null, 2))
+      // await setData(response.data);
+      // console.log(response.data)
+      console.log('Before setData:', data);
+      setData(response.data);
+      console.log('After setData:', data);
+      setIsOpen(true);
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   };
+  useEffect(() => {
+      console.log('Data updated:', data);
+    }, [data]);
 
+  const CustomerTableModal = () => {
+    return (
+      <div className={style.modal}>
+        <div className={style.modalContent}>
+          <h2>Customers</h2>
+          {Array.isArray(data) ? (
+            <table>
+              <tbody>
+                {data.map((customer, index) => (
+                  <tr key={index}>
+                    <td>{customer.NationalID}</td>
+                    <td>{customer.FName}</td>
+                    <td>{customer.LName}</td>
+                    <td>{customer.PhoneNumber}</td>
+                    <td>{customer.BirthDate}</td>
+                    <td>{customer.Addres}</td>
+                    <td>{customer.PassportStatus}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No data available</p>
+          )}
+          <button className={style.closeModal} onClick={() => setIsOpen(false)}>Close</button>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className='w-full flex flex-col justify-center items-center' >
@@ -143,7 +180,7 @@ const Home = () => {
       {/* cards row 1*/}
       <div className={style['parentContainer']}>
 
-        {/* get Consultant */}
+        {/* 1 get Consultant */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشاور </h3>
@@ -160,14 +197,14 @@ const Home = () => {
             />
 
             <div className='my-3'></div>
-            <button className={style.week} onClick={getConsultant}>
+            <button className={style.week} onClick={() => getConsultant(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get customer */}
+        {/* 2 get customer */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشتری </h3>
@@ -182,14 +219,14 @@ const Home = () => {
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomer}>
+            <button className={style.week} onClick={() => getCustomer(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get Document */}
+        {/* 3 get Document */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مدرک </h3>
@@ -204,7 +241,7 @@ const Home = () => {
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getDocument}>
+            <button className={style.week} onClick={() => getDocument(id)}>
               ارسال
             </button>
           </div>
@@ -214,7 +251,7 @@ const Home = () => {
       {/* cards row 2 */}
       <div className={style['parentContainer']}>
 
-        {/* get customer document */}
+        {/* 4 get customer document */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مدرک یک مشتری </h3>
@@ -229,20 +266,21 @@ const Home = () => {
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomerDocument}>
+            <button className={style.week} onClick={() => getCustomerDocument(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get all Consultants */}
+        {/* 5 get all Consultants */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> دریافت لیست مشاوران </h3>
-
-            <div className='my-20'></div>
-            <div className='my-2'></div>
+            <div className='my-7'></div>
+            <h2 className='mt-2'> برای دریافت لیست مشاوران کلیک کنید. </h2>
+            <div className='my-7'></div>
+            {/* <div className='my-1'></div> */}
             <button className={style.week} onClick={getAllConsultants}>
               دریافت
             </button>
@@ -250,7 +288,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* get visa by status */}
+        {/* 6 get visa by status */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> فیلتر ویزا بر اساس وضعیت </h3>
@@ -265,7 +303,7 @@ const Home = () => {
               onChange={(e) => setStatus(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getVisasByStatus}>
+            <button className={style.week} onClick={() => getVisasByStatus(status)}>
               ارسال
             </button>
 
@@ -277,7 +315,7 @@ const Home = () => {
       {/* cards 3 */}
       <div className={style['parentContainer']}>
 
-        {/* get visa by immigration type */}
+        {/* 7 get visa by immigration type */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> فیلتر ویزا بر اساس روش مهاجرتی  </h3>
@@ -292,36 +330,37 @@ const Home = () => {
               onChange={(e) => setImmigrationType(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getVisasByImmigrationType}>
+            <button className={style.week} onClick={() => getVisasByImmigrationType(immigrationType)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get visa by Country id */}
+        {/* 8 get visa by Country id */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> دریافت ویزا بر اساس کشور  </h3>
             <hr style={{ border: '0.5px solid #bdbdbd', width: '15rem', marginTop: '0.5rem', marginBottom: '0.5rem' }} />
             <h2 className='mt-2'> شناسه کشور  مورد نظر را وارد کنید. </h2>
+            <div className='my-3'></div>
             <input
               type="text"
               name="name"
               className={style.weekinput}
               placeholder=" شناسه کشور "
               // value={id}
-              onChange={(e) => setStatus(e.target.value)}
+              onChange={(e) => setId(e.target.value)}
             />
-            <div className='my-3'></div>
-            <button className={style.week} onClick={getVisasByCountryID}>
+            <div className='my-4'></div>
+            <button className={style.week} onClick={() => getVisasByCountryID(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get customer by payment status */}
+        {/* 9 get customer by payment status */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشتری بر اساس وضعیت پرداخت </h3>
@@ -336,7 +375,7 @@ const Home = () => {
               onChange={(e) => setStatus(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomersByPaymentStatus}>
+            <button className={style.week} onClick={() => getCustomersByPaymentStatus(status)}>
               ارسال
             </button>
 
@@ -347,7 +386,7 @@ const Home = () => {
       {/* cards 4 */}
       <div className={style['parentContainer']}>
 
-        {/* get Customers By Country ID */}
+        {/* 10 get Customers By Country ID */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشتری بر اساس کشور </h3>
@@ -362,14 +401,14 @@ const Home = () => {
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomersByCountryID}>
+            <button className={style.week} onClick={() => getCustomersByCountryID(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get Customers By Consultant ID */}
+        {/* 11 get Customers By Consultant ID */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشتری بر اساس  مشاور </h3>
@@ -384,14 +423,14 @@ const Home = () => {
               onChange={(e) => setId(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomersByConsultantID}>
+            <button className={style.week} onClick={() => getCustomersByConsultantID(id)}>
               ارسال
             </button>
 
           </div>
         </div>
 
-        {/* get Customers By Immigration Type */}
+        {/* 12 get Customers By Immigration Type */}
         <div className={style['weekly-menu-card']}>
           <div className={`${style['new-food-item-container']}`}>
             <h3 className={style.h33}> جست و جو مشتری بر اساس  روش مهاجرتی </h3>
@@ -401,22 +440,26 @@ const Home = () => {
               type="text"
               name="name"
               className={style.weekinput}
-              placeholder="شناسه مشاور "
+              placeholder="روش مهاجرتی "
               // value={id}
               onChange={(e) => setImmigrationType(e.target.value)}
             />
             <div className='my-3'></div>
-            <button className={style.week} onClick={getCustomersByImmigrationType}>
+            <button className={style.week} onClick={() => getCustomersByImmigrationType(immigrationType)}>
               ارسال
             </button>
 
           </div>
         </div>
-
       </div>
 
-    </div>
+      <div className={style.container}>
 
+        {isOpen && <CustomerTableModal/>}
+      </div>
+
+
+    </div>
   );
 };
 
