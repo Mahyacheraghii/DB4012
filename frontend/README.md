@@ -1,8 +1,19 @@
-# React + Vite
+# running databes
+1-run docker container:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  https://www.youtube.com/watch?v=9c7Ti2OcLZg
 
-Currently, two official plugins are available:
+   docker run -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Mahya09354600908' -p 1433:1433 --name sql_edge -    d mcr.microsoft.com/azure-sql-edge
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   
+2-  make connection using azure data studio(more information in backend/dbconfig.js)
+
+# running backend
+cd backend
+
+npm start
+
+# running frontend
+cd frontend
+
+npm run dev
