@@ -1,7 +1,0 @@
-django
-djangorestframework
-django-cors-headers==2.0.0
-pyodbc
-django-pyodbc-azure
-djangorestframework==3.11.2
-Django==2.1.0
