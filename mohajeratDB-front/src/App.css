@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  @font-face {
+    font-family: 'vazir';
+    src: url(./font/Vazir-Light.woff) format('woff');
+    font-weight: 200; /* Light font weight */
+}
+
+@font-face {
+    font-family: 'vazir';
+    src: url(./font/Vazir-Bold.woff) format('woff');
+    font-weight: bold; /* Bold font weight */
+}
+
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(9, 114, 194, 0.1);
+}

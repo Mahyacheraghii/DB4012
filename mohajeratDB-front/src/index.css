@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    direction: rtl;
+    background-color: rgba(9, 114, 194, 0.1);
+    
+    font-family: "Vazir", "Vazirmatn", "Arabic Typesetting", sans-serif;
+}
