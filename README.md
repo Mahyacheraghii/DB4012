@@ -12,17 +12,20 @@ you can run the databse by buliding a docker container or simply change ./backen
       command: docker run -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Mahya09354600908' -p 1433:1433 --name sql_edge -d mcr.microsoft.com/azure-sql-edge
 
    
-  2- make connection using azure data studio(more information in backend/dbconfig.js)
+    2- make connection using azure data studio(more information in backend/dbconfig.js)
 
 # 2️⃣running backend
-cd backend
-
-npm start
+  enter the following commands in your terminal/command prompt:
+    cd backend
+    npm start
 
 # 3️⃣running frontend
-cd frontend
+  enter the following commands in your terminal/command prompt:
+    cd frontend
+    npm run dev
 
-npm run dev
-
-
+    
 all done!
+
+note: make sure to download and install dependencies.
+
