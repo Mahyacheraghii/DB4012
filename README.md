@@ -1,4 +1,4 @@
-# running databes
+# 1️⃣ running databes
 you can run the databse by buliding a docker container or simply change ./backend/dbconfig.js file to match your own prefrences.
 
 using docker and azure data studio:
@@ -14,12 +14,14 @@ using docker and azure data studio:
    
 2- make connection using azure data studio(more information in backend/dbconfig.js)
 
-# running backend
+# 2️⃣running backend
 cd backend
 
 npm start
 
-# running frontend
+# 3️⃣running frontend
 cd frontend
 
 npm run dev
+
+all done!
