@@ -1,3 +1,5 @@
+you can see the project overview (images and recorded video) in ./overveiw folder but in case you want to run the project on your own system follow these steps:
+
 # 1️⃣ running databes
 you can run the databse by buliding a docker container or simply change ./backend/dbconfig.js file to match your own prefrences.
 
