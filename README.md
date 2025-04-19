@@ -11,10 +11,8 @@ you can run the databse using docker  connecte to your own SQL Server manually b
     2. Run the following command to create and start the Docker container:
     
        ```bash
-       docker run -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=YourPassword123!' -p 1433:1433 --name sql_edge -d    mcr.microsoft.com/azure-sql-edge
+       docker run -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Pass12345' -p 1433:1433 --name sql_edge -d    mcr.microsoft.com/azure-sql-edge
        ```
-    
-       Replace `YourPassword123!` with a strong password of your choice.
     
     3. Use Azure Data Studio to connect to the database.  
        Refer to the configuration in `./backend/dbconfig.js` for connection details.
