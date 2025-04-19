@@ -1,6 +1,6 @@
-you can see the project overview (images and recorded video) in ./overveiw folder but in case you want to run the project on your own system follow these steps:
+you can see the project overview (images and a recorded video) in ./overveiw folder but in case you want to run the project on your own system follow these steps:
 
-# 1️⃣ run the databes
+## 1️⃣ run the databes
 you can run the databse using docker  connecte to your own SQL Server manually by updating the `./backend/dbconfig.js` file.
 
   using docker and azure data studio:
@@ -19,14 +19,14 @@ you can run the databse using docker  connecte to your own SQL Server manually b
     3. Use Azure Data Studio to connect to the database.  
        Refer to the configuration in `./backend/dbconfig.js` for connection details.
 
-# 2️⃣Run the Backend
+## 2️⃣Run the Backend
 
   enter the following commands in your terminal/command prompt:
   
     cd backend
     npm start
 
-# 3️⃣Run the Frontend
+## 3️⃣Run the Frontend
 
   enter the following commands in your terminal/command prompt:
   
