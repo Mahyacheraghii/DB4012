@@ -18,7 +18,7 @@ const tedious = require('tedious');
 
 const config = {
     user: "sa",
-    password: "Mahya09354600908",
+    password: "Pass12345",
     server: "localhost",
     port: 1401,
     database: "mohajeratDB",
